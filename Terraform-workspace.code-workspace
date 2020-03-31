@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "s3workspace"
+		},
+		{
+			"path": "mullti-tier-environment"
+		},
+		{
+			"path": "s3-with-module"
+		},
+		{
+			"path": "multi-tier-environment-with-modules"
+		}
+	],
+	"settings": {}
+}
