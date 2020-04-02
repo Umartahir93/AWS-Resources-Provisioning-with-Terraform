@@ -6,7 +6,7 @@ provider "aws" {
 
 terraform {
   backend "s3"{
-  key     = "PROD/infrastructure.tfstate"
+  key     = "ecs_fargate/infrastructure.tfstate"
   bucket  = "umartahir-terraform-buckettestus-east-1"
   region  = "us-east-1"
   }
