@@ -3,14 +3,10 @@
       "name": "${task_definition_name}",
       "image": "${docker_image_url}",
       "essential": true,
-      "memory": "${memory}"
-      "environment":[{
-          "name":"spring_profile_active",
-          "value":"${spring_profile}"
-      }],
+      "memory": ${memory},
       "portMappings": [
         {
-          "containerPort": ${docker_container_port},
+          "containerPort": ${docker_container_port}
         }],
         "logConfiguration":{
             "logDriver": "awslogs",

@@ -3,11 +3,9 @@ variable "region" {
 }
 
 variable "ecs_cluster_name" {
-
 }
 
 variable "internet_cidr_blocks" {
-
 }
 
 

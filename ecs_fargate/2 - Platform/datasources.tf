@@ -1,9 +1,9 @@
 data "terraform_remote_state" "infrastructure" {
-  backend = "s3"
+    backend = "s3"
 
-  config = {
-    workspaces = {
-      name = "dev-env"
-    }
-  }
+    config = {
+    key    = "env:/dev-env/ecs_fargate/infrastructure.tfstate"
+    bucket = "umartahir-terraform-buckettestus-east-1"
+    region = "us-east-1"
+    } 
 }
