@@ -1,12 +1,16 @@
 #Fargate ECS Service
 resource "aws_ecs_service" "ecs_service" {
   name            = var.ecs_service_name
-  task_definition = aws_ecs_task_definition.springboot-task-definition.arn
+  task_definition = aws_ecs_task_definition.task_definition_for_application.arn
   cluster         = data.terraform_remote_state.platform.outputs.ecs_cluster_name
   launch_type     = "FARGATE"
 
   network_configuration {
-    subnets          = data.terraform_remote_state.platform.outputs.ecs_public_subnets
+    #since we have a load balancer and nat gateway attached we should be deploying in private subnets
+    #but I deployed in public subnet just to try some few things
+    #you can deploy services in private subnet!! And you should :) 
+
+    subnets          = data.terraform_remote_state.platform.outputs.ecs_public_subnets 
     security_groups  = [aws_security_group.app_security_group.id]
     assign_public_ip = true
   }
@@ -19,13 +23,11 @@ resource "aws_ecs_service" "ecs_service" {
   desired_count = 2
 }
 
-#Task definition
-resource "aws_ecs_task_definition" "springboot-task-definition" {
-  container_definitions = data.template_file.ecs_task_definition_template.rendered
-  family                = var.task_definition_name
-  
-
-  cpu                      = 512
+#Task definition for application
+resource "aws_ecs_task_definition" "task_definition_for_application" {
+  container_definitions    = data.template_file.ecs_task_definition_template.rendered
+  family                   = var.task_definition_name
+  cpu                      = var.cpu
   memory                   = var.memory
   requires_compatibilities = ["FARGATE"]
   network_mode             = "awsvpc"
@@ -35,6 +37,7 @@ resource "aws_ecs_task_definition" "springboot-task-definition" {
 
 }
 
+#Role
 resource "aws_iam_role" "fargate_iam_role" {
   name = "fargate_iam_role"
   assume_role_policy = data.aws_iam_policy_document.ecs-task-assume-role.json
@@ -52,9 +55,9 @@ resource "aws_security_group" "app_security_group" {
   vpc_id      = data.terraform_remote_state.platform.outputs.vpc_id
 
   ingress {
-    from_port   = 8080
+    from_port   = 80
     protocol    = "TCP"
-    to_port     = 8080
+    to_port     = 80
     cidr_blocks = [data.terraform_remote_state.platform.outputs.vpc_cidr_block]
   }
 
@@ -72,10 +75,9 @@ resource "aws_security_group" "app_security_group" {
 }
 
 #CloudWatch
-resource "aws_cloudwatch_log_group" "springbootapp_log_group" {
-  name = "Log-group"
+resource "aws_cloudwatch_log_group" "application_log_group" {
+  name = "/ecs/sun-api"
 }
-
 
 
 

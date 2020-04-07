@@ -11,9 +11,6 @@ variable "docker_image_url" {
 
 }
 
-variable "spring_profile" {
-
-}
 
 variable "ecs_service_name" {
 
@@ -30,6 +27,11 @@ variable "docker_container_port" {
 variable "desired_task_number" {
   
 }
+
+variable "cpu" {
+  
+}
+
 
 
 
