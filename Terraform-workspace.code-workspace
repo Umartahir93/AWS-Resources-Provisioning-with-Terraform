@@ -1,19 +1,22 @@
 {
 	"folders": [
 		{
-			"path": "s3workspace"
-		},
-		{
-			"path": "mullti-tier-environment"
-		},
-		{
-			"path": "s3-with-module"
-		},
-		{
-			"path": "multi-tier-environment-with-modules"
-		},
-		{
 			"path": "ecs_fargate"
+		},
+		{
+			"path": "Networking-infrastructure"
+		},
+		{
+			"path": "Networking-infrastructure-with-modules"
+		},
+		{
+			"path": "s3-bucket"
+		},
+		{
+			"path": "s3-bucket-with-module"
+		},
+		{
+			"path": "CI:CD Pipelines"
 		}
 	],
 	"settings": {}

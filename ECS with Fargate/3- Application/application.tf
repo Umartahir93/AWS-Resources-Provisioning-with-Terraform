@@ -33,7 +33,7 @@ resource "aws_ecs_task_definition" "task_definition_for_application" {
   network_mode             = "awsvpc"
 
   execution_role_arn = aws_iam_role.fargate_iam_role.arn
-  task_role_arn      = aws_iam_role.fargate_iam_role.arn
+  task_role_arn      = aws_iam_role.ecs_task_execution_role.arn
 
 }
 

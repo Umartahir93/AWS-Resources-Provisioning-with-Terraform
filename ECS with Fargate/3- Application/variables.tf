@@ -7,8 +7,8 @@ variable "task_definition_name" {
 
 }
 
-variable "docker_image_url" {
-
+locals  {
+   docker_image_url =  data.terraform_remote_state.ecr_url.outputs.aws_ecr_url
 }
 
 
@@ -31,9 +31,6 @@ variable "desired_task_number" {
 variable "cpu" {
   
 }
-
-
-
 
 
 

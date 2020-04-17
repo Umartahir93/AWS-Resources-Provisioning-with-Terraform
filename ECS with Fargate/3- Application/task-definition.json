@@ -5,6 +5,8 @@
       "essential": true,
       "portMappings": [
         {
+          "hostPort": 80,
+          "protocol": "tcp",
           "containerPort": ${docker_container_port}
         }],
         "logConfiguration":{
@@ -17,3 +19,5 @@
         }
     }
   ]
+
+  
